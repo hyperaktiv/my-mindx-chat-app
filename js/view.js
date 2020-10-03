@@ -19,10 +19,7 @@ view.setActiveScreen = (screenName) => {
             view.setActiveScreen("registerPage");
          });
          break;
-         
-      default:
-         document.getElementById("app").innerHTML = components.registerPage;
-         break;
+    
    }
 }
 

@@ -13,11 +13,10 @@ window.onload = () => {
    // Initialize Firebase
    firebase.initializeApp(firebaseConfig);
 
-
    
    // view.setActiveScreen("welcomeScreen");
    view.setActiveScreen("registerPage");
 
 
-
 }
+

@@ -41,6 +41,8 @@ view.setActiveScreen = (screenName) => {
             controller.login(dataLogin);
          });
          break;
+
+   
    }
 }
 

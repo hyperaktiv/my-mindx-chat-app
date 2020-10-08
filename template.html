@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Document</title>
+
+   <link rel="stylesheet" href="./css/style.css">
+   <link rel="stylesheet" href="./css/login.css">
+
+
+</head>
+
+<body>
+
+   <div class="login-container">
+      <div class="background-img"></div>
+      <div class="form-wrapper">
+         <div class="login-header">MindX Chat</div>
+         <form action="" method="post" id="login-form">
+            <div class="input-wrapper">
+               <input type="email" name="email" id="" placeholder="Email">
+               <span id="email-error" class="error"></span>
+            </div>
+            <div class="input-wrapper">
+               <input type="password" name="password" id="" placeholder="Password">
+               <span id="password-error" class="error"></span>
+            </div>
+            <div class="form-action">
+               <p>Don't have an account?&nbsp;<span id="toLogin" class="pointer">Register</span></p> 
+               <button class="btn" type="submit" id="login-submit">Login</button>
+            </div>
+         </form>
+      </div>
+   </div>
+
+   <script>
+      let x = document.getElementById("toLogin");
+      x.addEventListener("click", () => {
+         console.log("123123")
+      })
+   </script>
+</body>
+
+</html>

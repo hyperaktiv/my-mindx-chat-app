@@ -7,7 +7,7 @@ components.registerPage = `
       <div class="background-img"></div>
       <div class="form-wrapper">
          <div class="register-header">MindX Chat</div>
-         <form action="" method="post" id="register-form">
+         <form method="post" id="register-form">
             <div class="name-wrapper">
                <div class="input-wrapper">
                   <input type="text" name="firstName" placeholder="First Name" />
@@ -27,7 +27,7 @@ components.registerPage = `
                <span id="password-error" class="error"></span>
             </div>
             <div class="input-wrapper">
-               <input type="password" name="rePassword" id="" placeholder="Re-password">
+               <input type="password" name="repassword" id="" placeholder="Re-password">
                <span id="repassword-error" class="error"></span>
             </div>
             <div class="form-action">
@@ -43,7 +43,7 @@ components.loginPage = `
       <div class="background-img"></div>
       <div class="form-wrapper">
          <div class="login-header">MindX Chat</div>
-         <form action="" method="post" id="login-form">
+         <form method="post" id="login-form">
             <div class="input-wrapper">
                <input type="email" name="email" id="" placeholder="Email">
                <span id="email-error" class="error"></span>

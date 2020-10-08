@@ -6,6 +6,9 @@
 a {
    text-decoration: none;
 }
+#app {
+   margin: 2px;
+}
 .input-wrapper {
    margin-bottom: 10px;
 }
@@ -16,7 +19,8 @@ a {
    width: 100%;
 }
 .error {
-   font-size: small;
+   margin-left: 5%;
+   font-size: 14px;
    color: red;
 }
 .btn {
@@ -32,4 +36,8 @@ a {
 }
 .pointer {
    cursor: pointer;
+}
+
+#toLogin, #toRegister {
+   color: blue;
 }

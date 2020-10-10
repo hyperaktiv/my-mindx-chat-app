@@ -1,5 +1,5 @@
 window.onload = () => {
-   
+
    // Your web app's Firebase configuration
    var firebaseConfig = {
       apiKey: "AIzaSyDPFM4Lo2QLX2QB1dceTbwJfaZGSyNAesU",
@@ -13,9 +13,28 @@ window.onload = () => {
    // Initialize Firebase
    firebase.initializeApp(firebaseConfig);
 
-   
-   // view.setActiveScreen("welcomeScreen");
-   view.setActiveScreen("registerPage");
+   firebase.auth().onAuthStateChanged(function (user) {
+
+      console.log(user)
+
+      if (user) {
+         if (user.emailVerified) {
+            model.currentUser = {
+               displayName: user.displayName,
+               email: user.email
+            };
+            view.setActiveScreen('chatPage');
+         } else {
+            view.setActiveScreen('loginPage');
+            alert("Go to verify your email to login.");
+         }
+
+      } else {
+         view.setActiveScreen("registerPage");
+      }
+   });
+
+
 
 
 }

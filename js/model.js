@@ -1,5 +1,7 @@
 const model = {}
 
+model.currentUser = {};
+
 model.register = async ({ firstName, lastName, email, password }) => {
    try {
       // call method to register
@@ -10,12 +12,16 @@ model.register = async ({ firstName, lastName, email, password }) => {
          displayName: firstName + ' ' + lastName
       });
 
-      if(setReg.additionalUserInfo.isNewUser) {
+      if (setReg.additionalUserInfo.isNewUser) {
          alert("You have just registered an account.\n Go to Login.");
       }
-      
+
       // send email verify
       firebase.auth().currentUser.sendEmailVerification();
+
+      // switch to login sreen
+      view.setActiveScreen('loginPage');
+
 
    } catch (err) {
       console.log(err);
@@ -24,18 +30,22 @@ model.register = async ({ firstName, lastName, email, password }) => {
 }
 
 model.login = async ({ email, password }) => {
+   try {
+      // verify loggin details
+      let getLogin = await firebase.auth().signInWithEmailAndPassword(email, password);
 
-   // verify loggin details
-   let getLogin = await firebase.auth().signInWithEmailAndPassword(email, password).catch(function (error) {
+      // if (getLogin.user.emailVerified) {
+      //    view.setActiveScreen('welcomeScreen');
+      // } else {
+      //    alert("Go to verify your email to login.");
+      //    view.setActiveScreen('loginPage');
+      // }
+      // var user = firebase.auth().currentUser;
 
-      alert(error.message);
 
-   });
-   if(getLogin) {
-      alert("You're logged in.");
+
+   } catch (err) {
+      console.log(err);
+      alert(err.message);
    }
-
-   // var user = firebase.auth().currentUser;
-   // console.log(user);
-
 }

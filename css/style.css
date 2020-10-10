@@ -1,43 +1,45 @@
 * {
-   margin: 0;
-   padding: 0;
-   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 a {
-   text-decoration: none;
+  text-decoration: none;
 }
 #app {
-   margin: 2px;
+  margin: 2px;
 }
 .input-wrapper {
-   margin-bottom: 10px;
+  margin-bottom: 10px;
 }
 .input-wrapper input {
-   padding: 12px 10px;
-   border-radius: 5px;
-   border: 1px solid #dbdbdb;
-   width: 100%;
+  padding: 12px 10px;
+  border-radius: 5px;
+  border: 1px solid #dbdbdb;
+  width: 100%;
 }
 .error {
-   margin-left: 5%;
-   font-size: 14px;
-   color: red;
+  margin-left: 5%;
+  font-size: 14px;
+  color: red;
 }
 .btn {
-   padding: 10px 20px;
-   border: 1px solid black;
-   border-radius: 3px;
-   background-color: royalblue;
-   color: white;
-   font-size: 16px;
+  padding: 10px 20px;
+  border: 1px solid black;
+  border-radius: 3px;
+  background-color: royalblue;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
 }
 .btn:hover {
-   cursor: pointer;
+  cursor: pointer;
 }
 .pointer {
-   cursor: pointer;
+  cursor: pointer;
 }
 
-#toLogin, #toRegister {
-   color: blue;
+#toLogin,
+#toRegister {
+  color: blue;
 }

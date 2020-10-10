@@ -1,0 +1,88 @@
+.chat-container {
+  margin: 0 5% 0 5%;
+  height: 100vh;
+}
+.chat-container .header {
+  color: #fff;
+  background-color: #037bfe;
+  font-size: 24px;
+  height: 64px;
+  text-align: center;
+  line-height: 64px;
+
+  /* căn chỉnh vị trí cho các phần tử bên trong
+  display: flex;
+  justify-content: center;
+  align-items: center; */
+}
+
+.chat-container .main {
+  height: calc(100vh - 64px);
+
+  border-left: 1px solid #ececec;
+  border-right: 1px solid #ececec;
+}
+
+.chat-container .conversation-title {
+  background-color: #ececec;
+  font-size: 26px;
+  height: 60px;
+  border-bottom: 2px solid #dbdbdb;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.chat-container .conversation-details {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+/* chiếm hết phần thừa khi thằng khác chiếm */
+.chat-container .list-messages {
+  flex-grow: 1;
+  padding: 10px;
+}
+
+#send-message-form {
+  padding: 22px 15px;
+  border-top: 1px solid #dbdbdb;
+  position: relative;
+}
+
+#messageInput {
+  border: none;
+  width: 100%;
+  padding: 5px;
+  border-radius: 2px solid #dbdbdb;
+  outline: 0;
+}
+#send-message-form button {
+  position: absolute;
+  bottom: 25%;
+  right: 1%;
+}
+
+.list-messages .message .message-content {
+  background-color: #dbdbdb;
+  max-width: 45%;
+  width: max-content;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.list-messages .message.message-mine {
+  display: flex;
+  justify-content: flex-end;
+}
+.list-messages .message.message-mine .message-content {
+  color: #fff;
+  background-color: #FE7A15;
+}
+
+.list-messages .message.message-other {
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+}

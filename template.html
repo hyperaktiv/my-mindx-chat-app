@@ -7,40 +7,34 @@
    <title>Document</title>
 
    <link rel="stylesheet" href="./css/style.css">
-   <link rel="stylesheet" href="./css/login.css">
+   <link rel="stylesheet" href="./css/chat.css">
 
 
 </head>
 
 <body>
-
-   <div class="login-container">
-      <div class="background-img"></div>
-      <div class="form-wrapper">
-         <div class="login-header">MindX Chat</div>
-         <form action="" method="post" id="login-form">
-            <div class="input-wrapper">
-               <input type="email" name="email" id="" placeholder="Email">
-               <span id="email-error" class="error"></span>
+   <div class="chat-container">
+      <div class="header">MinX Chat App</div>
+      <div class="main">
+         <div class="conversation-details">
+            <div class="conversation-title">First Conversation</div>
+            <div class="list-messages">
+               <div class="message message-mine">
+                  <div class="message-content">Hello there!</div>
+               </div>
+               <div class="message message-other">
+                  <div class="owner">Nguyen Van A</div>
+                  <div class="message-content">Hello!</div>
+               </div>
             </div>
-            <div class="input-wrapper">
-               <input type="password" name="password" id="" placeholder="Password">
-               <span id="password-error" class="error"></span>
-            </div>
-            <div class="form-action">
-               <p>Don't have an account?&nbsp;<span id="toLogin" class="pointer">Register</span></p> 
-               <button class="btn" type="submit" id="login-submit">Login</button>
-            </div>
-         </form>
+            <form id="send-message-form">
+               <input type="text" name="message" id="messageInput" placeholder="Type your message..." />
+               <button class="btn" id="">Send</button>
+            </form>
+         </div>
       </div>
    </div>
 
-   <script>
-      let x = document.getElementById("toLogin");
-      x.addEventListener("click", () => {
-         console.log("123123")
-      })
-   </script>
 </body>
 
 </html>

@@ -57,7 +57,7 @@ controller.login = ({ email, password }) => {
    if (email !== '' && password !== '') {
       const dataLogin = { email, password };
       
-      console.log(dataLogin);
+      // console.log(dataLogin);
 
       model.login(dataLogin);
    }

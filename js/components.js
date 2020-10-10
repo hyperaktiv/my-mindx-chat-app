@@ -36,7 +36,8 @@ components.registerPage = `
             </div>
          </form>
       </div>
-   </div>`;
+   </div>
+`;
 
 components.loginPage = `
    <div class="login-container">
@@ -58,4 +59,29 @@ components.loginPage = `
             </div>
          </form>
       </div>
-   </div>`;
+   </div>
+`;
+
+components.chatPage = `
+   <div class="chat-container">
+      <div class="header">MinX Chat App</div>
+      <div class="main">
+         <div class="conversation-details">
+            <div class="conversation-title">First Conversation</div>
+            <div class="list-messages">
+               <div class="message message-mine">
+                  <div class="message-content">Hello there!</div>
+               </div>
+               <div class="message message-other">
+                  <div class="owner">Nguyen Van A</div>
+                  <div class="message-content">Hello!</div>
+               </div>
+            </div>
+            <form id="send-message-form">
+               <input type="text" name="message" id="messageInput" placeholder="Type your message..."/>
+               <button class="btn" id="">Send</button>
+            </form>
+         </div>
+      </div>
+   </div>
+`;

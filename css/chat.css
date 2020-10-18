@@ -43,6 +43,8 @@
 .chat-container .list-messages {
   flex-grow: 1;
   padding: 10px;
+
+  overflow-y: scroll;
 }
 
 #send-message-form {

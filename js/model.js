@@ -7,7 +7,7 @@ model.register = async ({ firstName, lastName, email, password }) => {
       // call method to register
       let setReg = await firebase.auth().createUserWithEmailAndPassword(email, password);
 
-      // update profile
+      // update profile to the acc on firebase
       firebase.auth().currentUser.updateProfile({
          displayName: firstName + ' ' + lastName
       });
@@ -22,12 +22,12 @@ model.register = async ({ firstName, lastName, email, password }) => {
       // switch to login sreen
       view.setActiveScreen('loginPage');
 
-
    } catch (err) {
       console.log(err);
       alert(err.message);
    }
 }
+
 
 model.login = async ({ email, password }) => {
    try {
@@ -41,8 +41,6 @@ model.login = async ({ email, password }) => {
       //    view.setActiveScreen('loginPage');
       // }
       // var user = firebase.auth().currentUser;
-
-
 
    } catch (err) {
       console.log(err);

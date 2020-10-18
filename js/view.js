@@ -54,28 +54,36 @@ view.setActiveScreen = (screenName) => {
             const message = sendMessageForm.messageInput.value;
             const messageSend = {
                owner: model.currentUser.email,
-               content: message
+               content: message,
+               createdAt: new Date().toISOString()
             };
-            // send message
-            view.addMessage(messageSend);
+            if (message.trim() !== '') {
+               // send message
+               view.addMessage(messageSend);
+               // add sent message to firestore
+               updateMessageToFire(message);
+
+               // send another message to conversation
+               // const otherSend = {
+               //    owner: 'hyperaktiv99@gmail.com',
+               //    content: 'Đây là tin nhắn từ \'abcd\' gửi tới này!',
+               //    createdAt: new Date().toISOString()
+               // };
+               // view.addMessage(otherSend);
+            }
             sendMessageForm.messageInput.value = '';
 
-            // send another message to conversation
-            const otherSend = {
-               owner: 'abcd',
-               content: 'Đây là tin nhắn từ \'abcd\' gửi tới này!',
-            };
-            view.addMessage(otherSend);
-            // sendMessageForm.messageInput.value = '';
          });
          break;
    }
 }
 
+// show error when the inputs are not be right
 view.setErrorMessage = (elementId, message) => {
    document.getElementById(elementId).innerText = message;
 }
 
+// add the message to the chat when send or be sent
 view.addMessage = (message) => {
    const messageWrapper = document.createElement("div");
    messageWrapper.classList.add('message');

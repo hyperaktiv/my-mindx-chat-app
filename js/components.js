@@ -67,7 +67,7 @@ components.chatPage = `
       <div class="header">MinX Chat App</div>
       <div class="main">
          <div class="conversation-details">
-            <div class="conversation-title">First Conversation</div>
+            <div class="conversation-title" id="conversation-title"></div>
             <div class="list-messages">
                <div class="message message-mine"></div>
                <div class="message message-other"></div>

@@ -1,7 +1,6 @@
 const controller = {}
 
 controller.register = ({ firstName, lastName, email, password, repassword }) => {
-
    if (firstName === '')
       view.setErrorMessage('firstName-error', 'Please fill in first name.');
    else
@@ -33,17 +32,13 @@ controller.register = ({ firstName, lastName, email, password, repassword }) => 
       && password === repassword
    ) {
       const dataRegister = { firstName, lastName, email, password, repassword };
-
       // console.log(dataRegister);
-
       model.register(dataRegister);
    }
-
 
 }
 
 controller.login = ({ email, password }) => {
-
    if (email === '')
       view.setErrorMessage('email-error', 'Please fill in your email.');
    else
@@ -56,11 +51,8 @@ controller.login = ({ email, password }) => {
 
    if (email !== '' && password !== '') {
       const dataLogin = { email, password };
-      
       // console.log(dataLogin);
-
       model.login(dataLogin);
    }
-
 
 }

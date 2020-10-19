@@ -81,6 +81,7 @@
 .list-messages .message.message-mine .message-content {
   color: #fff;
   background-color: #FE7A15;
+  margin: 2px 0;
 }
 
 .list-messages .message.message-other {

@@ -1,5 +1,4 @@
 window.onload = () => {
-
    // Your web app's Firebase configuration
    var firebaseConfig = {
       apiKey: "AIzaSyDPFM4Lo2QLX2QB1dceTbwJfaZGSyNAesU",
@@ -32,22 +31,19 @@ window.onload = () => {
       }
    });
 
-   // firestoreQueries();
 }
 
-updateMessageToFire = async (message) => {
-   const dataToUpdate = {
-      messages: firebase.firestore.FieldValue.arrayUnion(message),
-   }
-   const responses = await firebase.firestore()
-      .collection('conversations').where('users', 'not-in', ['1stgoddeath@gmail.com', 'hyperaktiv99@gmail.com'])
-      .get();
-   // get document id
-   const users = getDataFromDocs(responses.docs);
-
-   firebase.firestore().collection('conversations').doc(users[0].id).update(dataToUpdate);
-}
-
+// updateMessageToFire = async (message) => {
+//    const dataToUpdate = {
+//       messages: firebase.firestore.FieldValue.arrayUnion(message),
+//    }
+//    const responses = await firebase.firestore()
+//       .collection('conversations').where('users', 'not-in', ['1stgoddeath@gmail.com', 'hyperaktiv99@gmail.com'])
+//       .get();
+//    // get document id
+//    const users = getDataFromDocs(responses.docs);
+//    firebase.firestore().collection('conversations').doc(users[0].id).update(dataToUpdate);
+// }
 
 firestoreQueries = async () => {
    // const responses = await firebase.firestore()
@@ -76,25 +72,26 @@ firestoreQueries = async () => {
    // firebase.firestore().collection('users').add(dataToAdd)
 
    // // update document
-   const messageSend = {
-      owner: 'hyperaktiv99@gmail.com',
-      content: 'ok, bro. What\'s up?',
-      createdAt: new Date().toISOString()
-   };
-   const dataToUpdate = {
-      messages: firebase.firestore.FieldValue.arrayUnion(messageSend),
-   }
-   const responses = await firebase.firestore()
-      .collection('conversations').where('users', 'not-in', ['1stgoddeath@gmail.com', 'hyperaktiv99@gmail.com'])
-      .get();
-   const users = getDataFromDocs(responses.docs);
+   // const messageSend = {
+   //    owner: 'hyperaktiv99@gmail.com',
+   //    content: 'ok, bro. What\'s up?',
+   //    createdAt: new Date().toISOString()
+   // };
+   // const dataToUpdate = {
+   //    messages: firebase.firestore.FieldValue.arrayUnion(messageSend),
+   // }
+   // const responses = await firebase.firestore()
+   //    .collection('conversations').where('users', 'not-in', ['1stgoddeath@gmail.com', 'hyperaktiv99@gmail.com'])
+   //    .get();
+   // const users = getDataFromDocs(responses.docs);
 
-   firebase.firestore().collection('conversations').doc(users[0].id).update(dataToUpdate);
+   // firebase.firestore().collection('conversations').doc(users[0].id).update(dataToUpdate);
 
    // // delete document
    // const docID = 'Kz6W99jSXnaHswq3PDKW';
    // firebase.firestore().collection('users').doc(docID).delete()
 }
+
 getDocumentID = async () => {
    const responses = await firebase.firestore()
       .collection('conversations').where('users', 'not-in', ['1stgoddeath@gmail.com', 'hyperaktiv99@gmail.com'])

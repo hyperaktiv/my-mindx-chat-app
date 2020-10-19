@@ -1,7 +1,6 @@
 const view = {};
 
 view.setActiveScreen = (screenName) => {
-
    switch (screenName) {
       case 'welcomeScreen':
          document.getElementById("app").innerHTML = components.welcomePage;
@@ -9,7 +8,6 @@ view.setActiveScreen = (screenName) => {
 
       case 'registerPage':
          document.getElementById("app").innerHTML = components.registerPage;
-
          let toLogin = document.getElementById("toLogin");
          toLogin.addEventListener("click", () => {
             view.setActiveScreen("loginPage");
@@ -26,7 +24,6 @@ view.setActiveScreen = (screenName) => {
             };
             controller.register(dataRegister);
          });
-
          break;
 
       case 'loginPage':
@@ -57,23 +54,19 @@ view.setActiveScreen = (screenName) => {
                content: message,
                createdAt: new Date().toISOString()
             };
-            if (message.trim() !== '') {
-               // send message
-               view.addMessage(messageSend);
+            if (message.trim() !== '') {                 // send message
                // add sent message to firestore
-               updateMessageToFire(message);
-
-               // send another message to conversation
-               // const otherSend = {
-               //    owner: 'hyperaktiv99@gmail.com',
-               //    content: 'Đây là tin nhắn từ \'abcd\' gửi tới này!',
-               //    createdAt: new Date().toISOString()
-               // };
-               // view.addMessage(otherSend);
+               model.addMessageToFire(messageSend);
             }
             sendMessageForm.messageInput.value = '';
-
          });
+
+         // get almost conversations of current user from firestore 
+         model.getConversations();
+
+         // listen the change of the conversation when an message sent
+         model.listenConversationChange();
+
          break;
    }
 }
@@ -100,4 +93,10 @@ view.addMessage = (message) => {
       `;
    }
    document.querySelector('.list-messages').appendChild(messageWrapper);
+}
+
+view.showCurrentConversation = () => {
+   document.querySelector('.list-messages').innerHTML = '';
+   document.getElementById("conversation-title").innerHTML = model.currentConversation.title;
+   model.currentConversation.messages.map((msg) => view.addMessage(msg));
 }

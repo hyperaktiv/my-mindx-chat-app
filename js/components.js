@@ -66,6 +66,13 @@ components.chatPage = `
    <div class="chat-container">
       <div class="header">MinX Chat App</div>
       <div class="main">
+         <div class="left-aside">
+            <div class="create-conversation">
+               <button class="btn add-conversation pointer">+ New conversation</button>
+            </div>
+            <div class="list-conversations">
+            </div>
+         </div>
          <div class="conversation-details">
             <div class="conversation-title" id="conversation-title"></div>
             <div class="list-messages">

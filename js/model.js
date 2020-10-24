@@ -42,12 +42,12 @@ model.addMessageToFire = async (message) => {
    const dataToUpdate = {
       messages: firebase.firestore.FieldValue.arrayUnion(message),
    };
-   // get document id
-   const responses = await firebase.firestore()
-      .collection('conversations').where('users', 'not-in', ['1stgoddeath@gmail.com', 'hyperaktiv99@gmail.com'])
-      .get();
-   const users = getDataFromDocs(responses.docs);
-   let docID = users[0].id;
+   // // get document id
+   // const responses = await firebase.firestore()
+   //    .collection('conversations').where('users', 'not-in', ['1stgoddeath@gmail.com', 'hyperaktiv99@gmail.com'])
+   //    .get();
+   // const users = getDataFromDocs(responses.docs);
+   let docID = model.currentConversation.id;
 
    firebase.firestore().collection('conversations').doc(docID).update(dataToUpdate);
 }
@@ -58,7 +58,12 @@ model.getConversations = async () => {
    model.conversations = getDataFromDocs(responses.docs);
    if (model.conversations.length > 0) {
       model.currentConversation = model.conversations[0];
+      // show the current conversation
       view.showCurrentConversation();
+
+      // show the list of conversations
+      view.showListConversation();
+
    }
 }
 
@@ -84,9 +89,9 @@ model.listenConversationChange = () => {
                   model.currentConversation = dataChange;
                   // view.showCurrentConversation();
                   view.addMessage(model.currentConversation.messages[model.currentConversation.messages.length - 1]);
+                  view.scrollToEnd();
                }
             }
          })
-
       });
 }

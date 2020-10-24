@@ -9,13 +9,33 @@
    <link rel="stylesheet" href="./css/style.css">
    <link rel="stylesheet" href="./css/chat.css">
 
-
 </head>
 
 <body>
    <div class="chat-container">
       <div class="header">MinX Chat App</div>
+      <button id="logout" class="btn logout" style="background-color: #ff5a44;">LogOut</button>
       <div class="main">
+         <div class="left-aside">
+            <div class="create-conversation">
+               <button class="btn add-conversation pointer">+ New conversation</button>
+            </div>
+            <div class="list-conversations">
+               <div class="conversation current">
+                  <div class="left-title-chat"><b>First Conversation</b></div>
+                  <div class="number-users">2 users</div>
+               </div>
+               <div class="conversation">
+                  <div class="left-title-chat"><b>second Conversation</b></div>
+                  <div class="number-users">5 users</div>
+               </div>
+               <div class="conversation">
+                  <div class="left-title-chat">Third Conversation</div>
+                  <div class="number-users">3 users</div>
+               </div>
+            </div>
+         </div>
+
          <div class="conversation-details">
             <div class="conversation-title">First Conversation</div>
             <div class="list-messages">

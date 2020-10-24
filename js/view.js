@@ -89,6 +89,7 @@ view.addMessage = (message) => {
    } else { // when sender is other people sent to conversation
       messageWrapper.classList.add('message-other');
       messageWrapper.innerHTML = `
+         <div class="owner"><b>${message.owner}</b></div>
          <div class="message-content">${message.content}</div>
       `;
    }
@@ -99,4 +100,41 @@ view.showCurrentConversation = () => {
    document.querySelector('.list-messages').innerHTML = '';
    document.getElementById("conversation-title").innerHTML = model.currentConversation.title;
    model.currentConversation.messages.map((msg) => view.addMessage(msg));
+   view.scrollToEnd();
+}
+
+view.addConversation = (conversation) => {
+   const conversationWrapper = document.createElement("div");
+   conversationWrapper.classList.add('conversation');
+   if (conversation.id === model.currentConversation.id) {
+      conversationWrapper.classList.add('current');
+   }
+   conversationWrapper.innerHTML = `
+      <div class="left-title-chat"><b>${conversation.title}</b></div>
+      <div class="number-users">User: <b>${conversation.users.length}</b></div>`;
+   document.querySelector('.list-conversations').appendChild(conversationWrapper);
+   conversationWrapper.addEventListener('click', () => {
+      // delete current class
+      let current = document.querySelector('.current');
+      current.classList.remove('current');
+      // add current class to which clicked
+      conversationWrapper.classList.add('current');
+
+      // show current conversation on chat screen
+      // model.currentConversation = model.conversations.filter(item => conversation.id === item.id);
+      for (let item of model.conversations) {
+         if (item.id === conversation.id) {
+            model.currentConversation = { ...item };
+            view.showCurrentConversation();
+         }
+      }
+   });
+}
+view.showListConversation = () => {
+   document.querySelector('.list-conversations').innerHTML = '';
+   model.conversations.map((item) => view.addConversation(item));
+}
+view.scrollToEnd = () => {
+   const elm = document.querySelector('.list-messages');
+   elm.scrollTop = elm.scrollHeight;
 }

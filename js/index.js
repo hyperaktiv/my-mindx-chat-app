@@ -33,18 +33,6 @@ window.onload = () => {
 
 }
 
-// updateMessageToFire = async (message) => {
-//    const dataToUpdate = {
-//       messages: firebase.firestore.FieldValue.arrayUnion(message),
-//    }
-//    const responses = await firebase.firestore()
-//       .collection('conversations').where('users', 'not-in', ['1stgoddeath@gmail.com', 'hyperaktiv99@gmail.com'])
-//       .get();
-//    // get document id
-//    const users = getDataFromDocs(responses.docs);
-//    firebase.firestore().collection('conversations').doc(users[0].id).update(dataToUpdate);
-// }
-
 firestoreQueries = async () => {
    // const responses = await firebase.firestore()
    //    .collection('conversations').where('users', 'array-contains', '1stgoddeath@gmail.com')

@@ -54,5 +54,21 @@ controller.login = ({ email, password }) => {
       // console.log(dataLogin);
       model.login(dataLogin);
    }
+}
 
+controller.createConversation = ({ title, receiver }) => {
+   if (title === '')
+      view.setErrorMessage('newTitle-error', 'Please fill in this field.');
+   else
+      view.setErrorMessage('newTitle-error', '');
+
+   if (receiver === '')
+      view.setErrorMessage('toEmail-error', 'Please fill in email receiver.');
+   else
+      view.setErrorMessage('toEmail-error', '');
+
+   if (title !== '' && receiver !== '') {
+      // create a new document on firebase ~~ a conversation
+      model.createNewConversation({ title, receiver });
+   }
 }

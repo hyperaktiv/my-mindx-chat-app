@@ -8,7 +8,6 @@ model.register = async ({ firstName, lastName, email, password }) => {
    try {
       // call method to register
       let setReg = await firebase.auth().createUserWithEmailAndPassword(email, password);
-
       // update profile to the acc on firebase
       firebase.auth().currentUser.updateProfile({
          displayName: firstName + ' ' + lastName
@@ -16,12 +15,10 @@ model.register = async ({ firstName, lastName, email, password }) => {
       if (setReg.additionalUserInfo.isNewUser) {
          alert("You have just registered an account.\n Go to Login.");
       }
-
       // send email verify
       firebase.auth().currentUser.sendEmailVerification();
       // switch to login sreen
       view.setActiveScreen('loginPage');
-
    } catch (err) {
       console.log(err);
       alert(err.message);
@@ -42,13 +39,7 @@ model.addMessageToFire = async (message) => {
    const dataToUpdate = {
       messages: firebase.firestore.FieldValue.arrayUnion(message),
    };
-   // // get document id
-   // const responses = await firebase.firestore()
-   //    .collection('conversations').where('users', 'not-in', ['1stgoddeath@gmail.com', 'hyperaktiv99@gmail.com'])
-   //    .get();
-   // const users = getDataFromDocs(responses.docs);
    let docID = model.currentConversation.id;
-
    firebase.firestore().collection('conversations').doc(docID).update(dataToUpdate);
 }
 
@@ -60,10 +51,8 @@ model.getConversations = async () => {
       model.currentConversation = model.conversations[0];
       // show the current conversation
       view.showCurrentConversation();
-
       // show the list of conversations
       view.showListConversation();
-
    }
 }
 
@@ -94,4 +83,17 @@ model.listenConversationChange = () => {
             }
          })
       });
+}
+
+model.createNewConversation = ({ title, receiver }) => {
+   let dataNewConversation = {
+      createdAt: new Date().toISOString(),
+      messages: [],
+      title: title,
+      users: [
+         model.currentUser.email,
+         receiver
+      ]
+   };
+   firebase.firestore().collection('conversations').add(dataNewConversation);
 }

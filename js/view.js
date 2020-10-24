@@ -60,13 +60,39 @@ view.setActiveScreen = (screenName) => {
             }
             sendMessageForm.messageInput.value = '';
          });
-
          // get almost conversations of current user from firestore 
          model.getConversations();
-
          // listen the change of the conversation when an message sent
          model.listenConversationChange();
 
+         // action to create new conversation page
+         let toCreateConversation = document.getElementById("createConversation");
+         toCreateConversation.addEventListener("click", () => {
+            view.setActiveScreen("newConversationPage");
+         });
+         break;
+
+      case 'newConversationPage':
+         document.getElementById("main").innerHTML = components.newConversationPage;
+         let cancelCreation = document.getElementById("cancelCreation");
+         cancelCreation.addEventListener("click", () => {
+            view.setActiveScreen("chatPage");
+         });
+         const createConversationForm = document.getElementById("new-conversation-form");
+         createConversationForm.addEventListener("submit", (e) => {
+            e.preventDefault();
+            let dataNewConversation = {
+               title: createConversationForm.newConversationTitle.value.trim(),
+               receiver: createConversationForm.toEmail.value.trim()
+            };
+
+            console.log(dataNewConversation);
+            controller.createConversation(dataNewConversation);
+
+            // reset input field on site
+            createConversationForm.newConversationTitle.value = '';
+            createConversationForm.toEmail.value = '';
+         });
          break;
    }
 }

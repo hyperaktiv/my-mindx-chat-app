@@ -15,10 +15,10 @@
    <div class="chat-container">
       <div class="header">MinX Chat App</div>
       <button id="logout" class="btn logout" style="background-color: #ff5a44;">LogOut</button>
-      <div class="main">
-         <div class="left-aside">
+      <div class="main" id="main">
+         <!-- <div class="left-aside">
             <div class="create-conversation">
-               <button class="btn add-conversation pointer">+ New conversation</button>
+               <button class="btn add-conversation pointer" id="createConversation">+ New conversation</button>
             </div>
             <div class="list-conversations">
                <div class="conversation current">
@@ -35,7 +35,6 @@
                </div>
             </div>
          </div>
-
          <div class="conversation-details">
             <div class="conversation-title">First Conversation</div>
             <div class="list-messages">
@@ -50,6 +49,27 @@
             <form id="send-message-form">
                <input type="text" name="message" id="messageInput" placeholder="Type your message..." />
                <button class="btn" id="">Send</button>
+            </form>
+         </div> -->
+
+         <div class="new-conversation">
+            <h4 class="new-conversation-title">Create a new conversation</h4>
+            <form id="new-conversation-form">
+               <div class="new-infor">
+                  <div class="input-wrapper">
+                     <input type="text" name="newConversationTitle" id="newConversationTitle"
+                        placeholder="Conversation name" />
+                     <span id="newTitle-error" class="error" style="display: block;"></span>
+                  </div>
+                  <div class="input-wrapper">
+                     <input type="email" name="toEmail" id="toEmail" placeholder="To Friend Email" />
+                     <span id="toEmail-error" class="error" style="display: block;"></span>
+                  </div>
+               </div>
+               <div class="form-action-btn">
+                  <button type="submit" class="btn">Save</button>
+                  <button class="btn btn-cancel" id="cancelCreation">Cancel</button>
+               </div>
             </form>
          </div>
       </div>

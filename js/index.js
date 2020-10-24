@@ -25,7 +25,6 @@ window.onload = () => {
             view.setActiveScreen('loginPage');
             alert("Go to verify your email to login.");
          }
-
       } else {
          view.setActiveScreen("registerPage");
       }
@@ -52,13 +51,13 @@ firestoreQueries = async () => {
    // const users = getDataFromDocs(responses.docs);
    // console.log(users);
 
-   // // add new document
+   // add new document
    // const dataToAdd = {
    //    name: 'Tran Nguyen A',
    //    age: 22
    // }
-   // firebase.firestore().collection('users').add(dataToAdd)
-
+   // let a = await firebase.firestore().collection('users').add(dataToAdd)
+   // console.log(a);
    // // update document
    // const messageSend = {
    //    owner: 'hyperaktiv99@gmail.com',
@@ -87,7 +86,6 @@ getDocumentID = async () => {
    const users = getDataFromDocs(responses.docs);
    console.log(users[0]);
 }
-
 // set a format for user from firebase
 getDataFromDoc = (res) => {
    const data = res.data();

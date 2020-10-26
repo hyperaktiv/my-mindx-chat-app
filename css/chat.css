@@ -2,14 +2,6 @@
   margin: 0 5% 0 5%;
   height: 100vh;
 }
-.chat-container .header {
-  color: #fff;
-  background-color: #037bfe;
-  font-size: 24px;
-  height: 64px;
-  text-align: center;
-  line-height: 64px;
-}
 
 .chat-container .main {
   height: calc(100vh - 64px);

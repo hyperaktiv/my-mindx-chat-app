@@ -1,6 +1,6 @@
 const view = {};
 
-view.setActiveScreen = (screenName) => {
+view.setActiveScreen = (screenName, fromCreate = false) => {
    switch (screenName) {
       case 'welcomeScreen':
          document.getElementById("app").innerHTML = components.welcomePage;
@@ -60,11 +60,18 @@ view.setActiveScreen = (screenName) => {
             }
             sendMessageForm.messageInput.value = '';
          });
-         // get almost conversations of current user from firestore 
-         model.getConversations();
-         // listen the change of the conversation when an message sent
-         model.listenConversationChange();
 
+         if (!fromCreate) {
+            // get almost conversations of current user from firestore 
+            model.getConversations();
+            // listen the change of the conversation when an message sent
+            model.listenConversationChange();
+         } else {
+            // show the current conversation
+            view.showCurrentConversation();
+            // show the list of conversations
+            view.showListConversation();
+         }
          // action to create new conversation page
          let toCreateConversation = document.getElementById("createConversation");
          toCreateConversation.addEventListener("click", () => {
@@ -76,7 +83,7 @@ view.setActiveScreen = (screenName) => {
          document.getElementById("main").innerHTML = components.newConversationPage;
          let cancelCreation = document.getElementById("cancelCreation");
          cancelCreation.addEventListener("click", () => {
-            view.setActiveScreen("chatPage");
+            view.setActiveScreen("chatPage", true);
          });
          const createConversationForm = document.getElementById("new-conversation-form");
          createConversationForm.addEventListener("submit", (e) => {
@@ -86,7 +93,6 @@ view.setActiveScreen = (screenName) => {
                receiver: createConversationForm.toEmail.value.trim()
             };
 
-            console.log(dataNewConversation);
             controller.createConversation(dataNewConversation);
 
             // reset input field on site
@@ -101,7 +107,6 @@ view.setActiveScreen = (screenName) => {
 view.setErrorMessage = (elementId, message) => {
    document.getElementById(elementId).innerText = message;
 }
-
 // add the message to the chat when send or be sent
 view.addMessage = (message) => {
    const messageWrapper = document.createElement("div");
@@ -121,14 +126,12 @@ view.addMessage = (message) => {
    }
    document.querySelector('.list-messages').appendChild(messageWrapper);
 }
-
 view.showCurrentConversation = () => {
    document.querySelector('.list-messages').innerHTML = '';
    document.getElementById("conversation-title").innerHTML = model.currentConversation.title;
    model.currentConversation.messages.map((msg) => view.addMessage(msg));
    view.scrollToEnd();
 }
-
 view.addConversation = (conversation) => {
    const conversationWrapper = document.createElement("div");
    conversationWrapper.classList.add('conversation');

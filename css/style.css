@@ -43,3 +43,12 @@ a {
 #toRegister {
   color: blue;
 }
+
+.header {
+  color: #fff;
+  background-color: #037bfe;
+  font-size: 24px;
+  height: 64px;
+  text-align: center;
+  line-height: 64px;
+}

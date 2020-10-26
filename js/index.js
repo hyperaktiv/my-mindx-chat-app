@@ -79,13 +79,15 @@ firestoreQueries = async () => {
    // firebase.firestore().collection('users').doc(docID).delete()
 }
 
-getDocumentID = async () => {
-   const responses = await firebase.firestore()
-      .collection('conversations').where('users', 'not-in', ['1stgoddeath@gmail.com', 'hyperaktiv99@gmail.com'])
-      .get();
-   const users = getDataFromDocs(responses.docs);
-   console.log(users[0]);
-}
+// getDocumentID = async () => {
+//    const responses = await firebase.firestore()
+//       .collection('conversations').where('users', 'not-in', ['1stgoddeath@gmail.com', 'hyperaktiv99@gmail.com'])
+//       .get();
+//    const users = getDataFromDocs(responses.docs);
+//    console.log(users[0]);
+// }
+
+
 // set a format for user from firebase
 getDataFromDoc = (res) => {
    const data = res.data();

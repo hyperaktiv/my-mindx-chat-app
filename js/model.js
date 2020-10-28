@@ -24,7 +24,6 @@ model.register = async ({ firstName, lastName, email, password }) => {
       alert(err.message);
    }
 }
-
 model.login = async ({ email, password }) => {
    try {
       // verify loggin details
@@ -34,7 +33,7 @@ model.login = async ({ email, password }) => {
       alert(err.message);
    }
 }
-
+// add message when there is a message sent
 model.addMessageToFire = async (message) => {
    const dataToUpdate = {
       messages: firebase.firestore.FieldValue.arrayUnion(message),
@@ -42,20 +41,19 @@ model.addMessageToFire = async (message) => {
    let docID = model.currentConversation.id;
    firebase.firestore().collection('conversations').doc(docID).update(dataToUpdate);
 }
-
+// get all the conversations of currentUser
 model.getConversations = async () => {
    const responses = await firebase.firestore()
       .collection('conversations').where('users', 'array-contains', model.currentUser.email).get();
    model.conversations = getDataFromDocs(responses.docs);
    if (model.conversations.length > 0) {
       model.currentConversation = model.conversations[0];
-      // show the current conversation
+
       view.showCurrentConversation();
-      // show the list of conversations
       view.showListConversation();
    }
 }
-
+// listen when data on firestore change
 model.listenConversationChange = () => {
    let isFirstRun = true;
    firebase.firestore().collection('conversations')
@@ -67,6 +65,7 @@ model.listenConversationChange = () => {
          }
          const docChanges = snapshot.docChanges();
          docChanges.map((docChange) => {
+            // when message has been sent
             if (docChange.type === 'modified') {
                let dataChange = getDataFromDoc(docChange.doc);
                for (let i = 0; i < model.conversations.length; i++) {
@@ -81,10 +80,17 @@ model.listenConversationChange = () => {
                   view.scrollToEnd();
                }
             }
+            // when create a new conversation
+            else if (docChange.type === 'added') {
+               let dataChange = getDataFromDoc(docChange.doc);
+               model.conversations.push(dataChange);
+               view.addConversation(dataChange);
+            }
+
          })
       });
 }
-
+// to create a new conversation from currentUser
 model.createNewConversation = ({ title, receiver }) => {
    let dataNewConversation = {
       createdAt: new Date().toISOString(),
@@ -96,4 +102,9 @@ model.createNewConversation = ({ title, receiver }) => {
       ]
    };
    firebase.firestore().collection('conversations').add(dataNewConversation);
+   view.setActiveScreen('chatPage', true);
+}
+
+model.addNewUserToConversation = (mail) => {
+
 }

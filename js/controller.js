@@ -11,6 +11,8 @@ controller.register = ({ firstName, lastName, email, password, repassword }) => 
       view.setErrorMessage('lastName-error', '');
    if (email === '')
       view.setErrorMessage('email-error', 'Please fill in your email.');
+   else if (!validateEmail(email))
+      view.setErrorMessage('email-error', 'Invalid email.');
    else
       view.setErrorMessage('email-error', '');
    if (password === '')
@@ -41,6 +43,8 @@ controller.register = ({ firstName, lastName, email, password, repassword }) => 
 controller.login = ({ email, password }) => {
    if (email === '')
       view.setErrorMessage('email-error', 'Please fill in your email.');
+   else if (!validateEmail(email))
+      view.setErrorMessage('email-error', 'Invalid email.');
    else
       view.setErrorMessage('email-error', '');
 
@@ -51,7 +55,6 @@ controller.login = ({ email, password }) => {
 
    if (email !== '' && password !== '') {
       const dataLogin = { email, password };
-      // console.log(dataLogin);
       model.login(dataLogin);
    }
 }
@@ -64,11 +67,26 @@ controller.createConversation = ({ title, receiver }) => {
 
    if (receiver === '')
       view.setErrorMessage('toEmail-error', 'Please fill in email receiver.');
+   else if (!validateEmail(receiver))
+      view.setErrorMessage('toEmail-error', 'Invalid email.');
    else
       view.setErrorMessage('toEmail-error', '');
 
-   if (title !== '' && receiver !== '') {
+   if (title !== '' && receiver !== '' && validateEmail(receiver)) {
       // create a new document on firebase ~~ a conversation
       model.createNewConversation({ title, receiver });
+   }
+}
+
+controller.addUserToConversation = (mail) => {
+   if (mail === '')
+      view.setErrorMessage('friendEmail-error', 'Please fill in field.');
+   else if (!validateEmail(mail))
+      view.setErrorMessage('friendEmail-error', 'Invalid email.');
+   else
+      view.setErrorMessage('toEmail-error', '');
+
+   if (mail !== '') {
+      model.addNewUserToConversation(mail);
    }
 }

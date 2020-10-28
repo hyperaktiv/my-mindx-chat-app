@@ -64,18 +64,24 @@ view.setActiveScreen = (screenName, fromCreate = false) => {
          if (!fromCreate) {
             // get almost conversations of current user from firestore 
             model.getConversations();
-            // listen the change of the conversation when an message sent
             model.listenConversationChange();
          } else {
-            // show the current conversation
             view.showCurrentConversation();
-            // show the list of conversations
             view.showListConversation();
          }
          // action to create new conversation page
          let toCreateConversation = document.getElementById("createConversation");
          toCreateConversation.addEventListener("click", () => {
             view.setActiveScreen("newConversationPage");
+         });
+
+         // add user to conversation action
+         const addUserForm = document.getElementById("add-user-form");
+         addUserForm.addEventListener("submit", (e) => {
+            e.preventDefault();
+            let newUserMail = addUserForm.friendEmail.value;
+
+            controller.addUserToConversation(newUserMail);
          });
          break;
 
@@ -92,12 +98,7 @@ view.setActiveScreen = (screenName, fromCreate = false) => {
                title: createConversationForm.newConversationTitle.value.trim(),
                receiver: createConversationForm.toEmail.value.trim()
             };
-
             controller.createConversation(dataNewConversation);
-
-            // reset input field on site
-            createConversationForm.newConversationTitle.value = '';
-            createConversationForm.toEmail.value = '';
          });
          break;
    }
@@ -131,6 +132,8 @@ view.showCurrentConversation = () => {
    document.getElementById("conversation-title").innerHTML = model.currentConversation.title;
    model.currentConversation.messages.map((msg) => view.addMessage(msg));
    view.scrollToEnd();
+
+   view.showListUser();
 }
 view.addConversation = (conversation) => {
    const conversationWrapper = document.createElement("div");
@@ -140,7 +143,7 @@ view.addConversation = (conversation) => {
    }
    conversationWrapper.innerHTML = `
       <div class="left-title-chat"><b>${conversation.title}</b></div>
-      <div class="number-users">User: <b>${conversation.users.length}</b></div>`;
+      <div class="number-users"><small>Users: ${conversation.users.length}</small></div>`;
    document.querySelector('.list-conversations').appendChild(conversationWrapper);
    conversationWrapper.addEventListener('click', () => {
       // delete current class
@@ -166,4 +169,13 @@ view.showListConversation = () => {
 view.scrollToEnd = () => {
    const elm = document.querySelector('.list-messages');
    elm.scrollTop = elm.scrollHeight;
+}
+
+view.showListUser = () => {
+   document.querySelector('.list-users').innerHTML = '';
+   let listUserWrapper = '';
+   for (let user of model.currentConversation.users) {
+      listUserWrapper += `<p>${user}</p>`;
+   }
+   document.querySelector('.list-users').innerHTML = listUserWrapper;
 }

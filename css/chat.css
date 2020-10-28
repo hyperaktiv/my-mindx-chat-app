@@ -25,7 +25,7 @@
   display: flex;
   flex-direction: column;
   height: 100%;
-  width: 80%;
+  width: 68%;
 }
 
 /* chiếm hết phần thừa khi thằng khác chiếm */
@@ -60,6 +60,7 @@
   width: max-content;
   padding: 10px;
   border-radius: 8px;
+  word-break: break-all;
 }
 .list-messages .message .owner {
   font-size: 15px;
@@ -83,9 +84,10 @@
 
 /* FOR LEFT ASIDE ON SCREEN */
 .chat-container .left-aside {
-  width: 20%;
+  width: 17%;
   height: 100%;
   border-right: 1px solid #dbdbdb;
+  overflow: hidden;
 }
 
 .chat-container .main .left-aside .create-conversation {
@@ -95,7 +97,6 @@
   justify-content: center;
   align-items: center;
 }
-
 .chat-container .left-aside .conversation {
   border: 1px dashed #dbdbdb;
   padding: 10px;
@@ -106,7 +107,6 @@
 .chat-container .left-aside .current {
   background-color: #dbdbdb;
 }
-
 .chat-container .new-conversation {
   width: 100%;
   height: 100%;
@@ -126,4 +126,24 @@
 }
 .chat-container .new-conversation .form-action-btn {
   margin-top: 2%;
+}
+
+/* FOR LEFT ASIDE ON SCREEN */
+.chat-container .right-aside {
+  width: 17%;
+  height: 100%;
+  border-right: 1px solid #dbdbdb;
+  overflow: hidden;
+  padding: 15px;
+}
+.chat-container .right-aside-title {
+  height: 60px;
+  border-bottom: 1px solid #dbdbdb;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.chat-container .right-aside .add-user-action {
+  margin-top: 15px;
 }

@@ -14,9 +14,9 @@
 <body>
    <div class="chat-container">
       <div class="header">MinX Chat App</div>
-      <button id="logout" class="btn logout" style="background-color: #ff5a44;">LogOut</button>
+      <!-- <button id="logout" class="btn logout" style="background-color: #ff5a44;">LogOut</button> -->
       <div class="main" id="main">
-         <!-- <div class="left-aside">
+         <div class="left-aside">
             <div class="create-conversation">
                <button class="btn add-conversation pointer" id="createConversation">+ New conversation</button>
             </div>
@@ -50,9 +50,29 @@
                <input type="text" name="message" id="messageInput" placeholder="Type your message..." />
                <button class="btn" id="">Send</button>
             </form>
-         </div> -->
+         </div>
 
-         <div class="new-conversation">
+         <div class="right-aside">
+            <div class="right-aside-title">
+               <h3>List User</h3>
+            </div>
+            <div class="list-users">
+               <p>1stgoddeath@gmail.com</p>
+               <p>hyperaktiv99@gmail.com</p>
+            </div>
+            <div class="add-user-action">
+               <form id="add-user-form">
+                  <div class="input-wrapper">
+                     <input type="text" name="friendEmail" id="friendEmail" placeholder="Enter friend's email" />
+                     <span id="friendEmail-error" class="error" style="display: block;"></span>
+                  </div>
+                  <div class="form-action-btn">
+                     <button class="btn">Add</button> </div>
+               </form>
+            </div>
+         </div>
+
+         <!-- <div class="new-conversation">
             <h4 class="new-conversation-title">Create a new conversation</h4>
             <form id="new-conversation-form">
                <div class="new-infor">
@@ -71,7 +91,7 @@
                   <button class="btn btn-cancel" id="cancelCreation">Cancel</button>
                </div>
             </form>
-         </div>
+         </div> -->
       </div>
    </div>
 

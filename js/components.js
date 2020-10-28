@@ -82,6 +82,22 @@ components.chatPage = `
             <button class="btn" id="">Send</button>
          </form>
       </div>
+      <div class="right-aside">
+         <div class="right-aside-title">
+            <h3>List User</h3>
+         </div>
+         <div class="list-users"></div>
+         <div class="add-user-action">
+            <form id="add-user-form">
+               <div class="input-wrapper">
+                  <input type="text" name="friendEmail" id="friendEmail" placeholder="Enter friend's email" />
+                  <span id="friendEmail-error" class="error" style="display: block;"></span>
+               </div>
+               <div class="form-action-btn">
+                  <button class="btn">Add</button> </div>
+            </form>
+         </div>
+      </div>
    </div>
 </div>`;
 

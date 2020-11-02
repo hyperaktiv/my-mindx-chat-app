@@ -80,9 +80,26 @@ view.setActiveScreen = (screenName, fromCreate = false) => {
          addUserForm.addEventListener("submit", (e) => {
             e.preventDefault();
             let newUserMail = addUserForm.friendEmail.value;
-
-            controller.addUserToConversation(newUserMail);
+            if (newUserMail === '')
+               view.setErrorMessage('friendEmail-error', 'Please fill in field.');
+            else if (!validateEmail(newUserMail))
+               view.setErrorMessage('friendEmail-error', 'Invalid email.');
+            else {
+               view.setErrorMessage('friendEmail-error', '');
+               model.addNewUserToConversation(newUserMail);
+               addUserForm.friendEmail.value = '';
+            }
          });
+         document.querySelector("#send-message-form input").addEventListener("click", () => {
+            view.hideNotification(model.currentConversation.id);
+         });
+
+         // responsive
+         const mediaQuery = window.matchMedia('screen and (max-width: 768px)');
+         if (mediaQuery.matches) {
+            document.querySelector("#createConversation").innerHTML = `<i class="fa fa-plus-square" aria-hidden="true"></i>`;
+         }
+
          break;
 
       case 'newConversationPage':
@@ -129,21 +146,27 @@ view.addMessage = (message) => {
 }
 view.showCurrentConversation = () => {
    document.querySelector('.list-messages').innerHTML = '';
+   document.querySelector('.list-users').innerHTML = '';
    document.getElementById("conversation-title").innerHTML = model.currentConversation.title;
+
+   // add the message to the conversation and scroll to end
    model.currentConversation.messages.map((msg) => view.addMessage(msg));
    view.scrollToEnd();
 
-   view.showListUser();
+   // show the lists of users on conversation
+   model.currentConversation.users.map((user) => view.addUserToConversation(user));
 }
 view.addConversation = (conversation) => {
    const conversationWrapper = document.createElement("div");
    conversationWrapper.classList.add('conversation');
+   conversationWrapper.id = conversation.id;
    if (conversation.id === model.currentConversation.id) {
       conversationWrapper.classList.add('current');
    }
    conversationWrapper.innerHTML = `
       <div class="left-title-chat"><b>${conversation.title}</b></div>
-      <div class="number-users"><small>Users: ${conversation.users.length}</small></div>`;
+      <div class="number-users"><small>Users: ${conversation.users.length}</small></div>
+      <div class="notification"></div>`;
    document.querySelector('.list-conversations').appendChild(conversationWrapper);
    conversationWrapper.addEventListener('click', () => {
       // delete current class
@@ -151,15 +174,14 @@ view.addConversation = (conversation) => {
       current.classList.remove('current');
       // add current class to which clicked
       conversationWrapper.classList.add('current');
-
       // show current conversation on chat screen
-      // model.currentConversation = model.conversations.filter(item => conversation.id === item.id);
       for (let item of model.conversations) {
          if (item.id === conversation.id) {
             model.currentConversation = { ...item };
             view.showCurrentConversation();
          }
       }
+      view.hideNotification(conversation.id);
    });
 }
 view.showListConversation = () => {
@@ -170,12 +192,18 @@ view.scrollToEnd = () => {
    const elm = document.querySelector('.list-messages');
    elm.scrollTop = elm.scrollHeight;
 }
-
-view.showListUser = () => {
-   document.querySelector('.list-users').innerHTML = '';
-   let listUserWrapper = '';
-   for (let user of model.currentConversation.users) {
-      listUserWrapper += `<p>${user}</p>`;
-   }
-   document.querySelector('.list-users').innerHTML = listUserWrapper;
+view.addUserToConversation = (user) => {
+   let userElement = document.createElement("div");
+   userElement.classList.add("user");
+   userElement.innerText = user;
+   document.querySelector('.list-users').appendChild(userElement);
+}
+view.showNotification = (id) => {
+   let conversationElement = document.getElementById(id);
+   // conversationElement.lastElementChild.style = "display: block";
+   conversationElement.querySelector('.notification').style = "display: block";
+}
+view.hideNotification = (id) => {
+   const conversationElement = document.getElementById(id);
+   conversationElement.querySelector(".notification").style = "display: none";
 }

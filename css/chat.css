@@ -106,6 +106,7 @@
 }
 .chat-container .left-aside .current {
   background-color: #dbdbdb;
+  position: relative;
 }
 .chat-container .new-conversation {
   width: 100%;
@@ -127,8 +128,12 @@
 .chat-container .new-conversation .form-action-btn {
   margin-top: 2%;
 }
+.chat-container .left-title-chat {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 
-/* FOR LEFT ASIDE ON SCREEN */
+/* FOR RIGHT ASIDE ON SCREEN */
 .chat-container .right-aside {
   width: 17%;
   height: 100%;
@@ -146,4 +151,33 @@
 }
 .chat-container .right-aside .add-user-action {
   margin-top: 15px;
+}
+.chat-container .right-aside .user {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+/**FORMAT NOTIFICATION*/
+.chat-container .notification {
+  width: 15px;
+  height: 15px;
+  background-color: #037BFE;
+  border-radius: 50%;
+  position: absolute;
+  right: 10px;
+  top: 22px;
+  display: none;
+}
+
+
+/****RESPONSIVE*****/
+@media only screen and (max-width: 768px) {
+  .chat-container .right-aside {
+    display: none;
+  }
+  .chat-container .conversation-details {
+    width: 83%;
+  }
+  .chat-container .number-users {
+    display: none;
+  }
 }

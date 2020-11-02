@@ -64,7 +64,7 @@ model.listenConversationChange = () => {
             return;
          }
          const docChanges = snapshot.docChanges();
-         docChanges.map((docChange) => {
+         for (let docChange of docChanges) {
             // when message has been sent
             if (docChange.type === 'modified') {
                let dataChange = getDataFromDoc(docChange.doc);
@@ -74,10 +74,23 @@ model.listenConversationChange = () => {
                   }
                }
                if (dataChange.id === model.currentConversation.id) {
+                  // model.currentConversation = dataChange;
+                  //check if currentUser sent message or add one more user
+                  if (model.currentConversation.users.length !== dataChange.users.length) {
+                     view.addUserToConversation(dataChange.users[dataChange.users.length - 1]);
+                  } else {
+                     let lastMsg = dataChange.messages[dataChange.messages.length - 1];
+                     if (lastMsg.owner !== model.currentUser.email) {
+                        view.showNotification(dataChange.id)
+                     }
+                     // view.showCurrentConversation();
+                     // view.addMessage(model.currentConversation.messages[model.currentConversation.messages.length - 1]);
+                     view.addMessage(dataChange.messages[dataChange.messages.length - 1]);
+                     view.scrollToEnd();
+                  }
                   model.currentConversation = dataChange;
-                  // view.showCurrentConversation();
-                  view.addMessage(model.currentConversation.messages[model.currentConversation.messages.length - 1]);
-                  view.scrollToEnd();
+               } else {
+                  view.showNotification(dataChange.id);
                }
             }
             // when create a new conversation
@@ -86,8 +99,9 @@ model.listenConversationChange = () => {
                model.conversations.push(dataChange);
                view.addConversation(dataChange);
             }
-
-         })
+            const change = getDataFromDoc(docChange.doc);
+            view.showNotification(change.id);
+         }
       });
 }
 // to create a new conversation from currentUser
@@ -106,5 +120,8 @@ model.createNewConversation = ({ title, receiver }) => {
 }
 
 model.addNewUserToConversation = (mail) => {
-
+   let dataAddMail = {
+      users: firebase.firestore.FieldValue.arrayUnion(mail)
+   };
+   firebase.firestore().collection('conversations').doc(model.currentConversation.id).update(dataAddMail);
 }

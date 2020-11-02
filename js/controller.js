@@ -77,16 +77,3 @@ controller.createConversation = ({ title, receiver }) => {
       model.createNewConversation({ title, receiver });
    }
 }
-
-controller.addUserToConversation = (mail) => {
-   if (mail === '')
-      view.setErrorMessage('friendEmail-error', 'Please fill in field.');
-   else if (!validateEmail(mail))
-      view.setErrorMessage('friendEmail-error', 'Invalid email.');
-   else
-      view.setErrorMessage('toEmail-error', '');
-
-   if (mail !== '') {
-      model.addNewUserToConversation(mail);
-   }
-}

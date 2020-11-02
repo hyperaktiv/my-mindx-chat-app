@@ -94,7 +94,8 @@ components.chatPage = `
                   <span id="friendEmail-error" class="error" style="display: block;"></span>
                </div>
                <div class="form-action-btn">
-                  <button class="btn">Add</button> </div>
+                  <button class="btn">Add</button>
+               </div>
             </form>
          </div>
       </div>

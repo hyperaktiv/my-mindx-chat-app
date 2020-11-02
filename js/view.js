@@ -95,7 +95,7 @@ view.setActiveScreen = (screenName, fromCreate = false) => {
          });
 
          // responsive
-         const mediaQuery = window.matchMedia('screen and (max-width: 768px)');
+         let mediaQuery = window.matchMedia('screen and (max-width: 768px)');
          if (mediaQuery.matches) {
             document.querySelector("#createConversation").innerHTML = `<i class="fa fa-plus-square" aria-hidden="true"></i>`;
          }
@@ -164,9 +164,24 @@ view.addConversation = (conversation) => {
       conversationWrapper.classList.add('current');
    }
    conversationWrapper.innerHTML = `
-      <div class="left-title-chat"><b>${conversation.title}</b></div>
+      <div class="left-title-chat">${conversation.title}</div>
       <div class="number-users"><small>Users: ${conversation.users.length}</small></div>
       <div class="notification"></div>`;
+
+   let mediaQuery = window.matchMedia('screen and (max-width: 768px)');
+   if (mediaQuery.matches) {
+      conversationWrapper.firstElementChild.innerHTML = conversation.title.charAt(0).toUpperCase();
+   }
+   mediaQuery.addListener(matches => {
+      if (mediaQuery.matches) {
+         conversationWrapper.firstElementChild.innerHTML = conversation.title.charAt(0).toUpperCase();
+         document.querySelector("#createConversation").innerHTML = `<i class="fa fa-plus-square" aria-hidden="true"></i>`;
+      } else {
+         conversationWrapper.firstElementChild.innerHTML = conversation.title;
+         document.querySelector("#createConversation").innerHTML = '+ New Chat';
+      }
+   })
+
    document.querySelector('.list-conversations').appendChild(conversationWrapper);
    conversationWrapper.addEventListener('click', () => {
       // delete current class

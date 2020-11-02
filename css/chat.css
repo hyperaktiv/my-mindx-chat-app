@@ -1,5 +1,5 @@
 .chat-container {
-  margin: 0 5% 0 5%;
+  /* margin: 0 5% 0 5%; */
   height: 100vh;
 }
 
@@ -100,9 +100,7 @@
 .chat-container .left-aside .conversation {
   border: 1px dashed #dbdbdb;
   padding: 10px;
-  margin-bottom: 2px;
   cursor: pointer;
-  width: 98%;
 }
 .chat-container .left-aside .current {
   background-color: #dbdbdb;
@@ -179,5 +177,18 @@
   }
   .chat-container .number-users {
     display: none;
+  }
+  .chat-container .conversation {
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    margin-bottom: 10px;
+  }
+  .chat-container .conversation:first-child {
+    margin-top: 10px;
   }
 }

@@ -66,7 +66,7 @@ components.chatPage = `
    <div class="main" id="main">
       <div class="left-aside">
          <div class="create-conversation">
-            <button class="btn add-conversation pointer" id="createConversation">+ New conversation</button>
+            <button class="btn add-conversation pointer" id="createConversation">+ New Chat</button>
          </div>
          <div class="list-conversations">
          </div>
